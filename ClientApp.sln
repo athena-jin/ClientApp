@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiBlazorApp", "MauiBlazorApp\MauiBlazorApp.csproj", "{D96FDB86-F1B9-4311-93D2-B2B0119ECB21}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiBlazorApp.Model", "MauiBlazorApp.Model\MauiBlazorApp.Model.csproj", "{92055F54-EF25-4A55-A5E9-D7B42FA3B44B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfClient", "WpfClient\WpfClient.csproj", "{411FE617-1D9A-495C-B7BF-27623B8D3884}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D96FDB86-F1B9-4311-93D2-B2B0119ECB21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D96FDB86-F1B9-4311-93D2-B2B0119ECB21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D96FDB86-F1B9-4311-93D2-B2B0119ECB21}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D96FDB86-F1B9-4311-93D2-B2B0119ECB21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D96FDB86-F1B9-4311-93D2-B2B0119ECB21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D96FDB86-F1B9-4311-93D2-B2B0119ECB21}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{92055F54-EF25-4A55-A5E9-D7B42FA3B44B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92055F54-EF25-4A55-A5E9-D7B42FA3B44B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92055F54-EF25-4A55-A5E9-D7B42FA3B44B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92055F54-EF25-4A55-A5E9-D7B42FA3B44B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{411FE617-1D9A-495C-B7BF-27623B8D3884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{411FE617-1D9A-495C-B7BF-27623B8D3884}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{411FE617-1D9A-495C-B7BF-27623B8D3884}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{411FE617-1D9A-495C-B7BF-27623B8D3884}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A8FD2B37-4F8D-4AE5-B6BB-DE09E87A4DB3}
+	EndGlobalSection
+EndGlobal

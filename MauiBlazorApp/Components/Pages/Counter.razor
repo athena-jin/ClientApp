@@ -1,0 +1,33 @@
+﻿@page "/counter"
+@using Syncfusion.Blazor.Buttons
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+@* <button class="btn btn-primary" @onclick="IncrementCount">Click me</button> *@
+<SfButton CssClass="btn btn-primary" OnClick="IncrementCount">Click me</SfButton>
+
+@code {
+    [Inject]
+    public MyODataServiceContext ODataService { get; set; }
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        // HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5275/odata/actor") };
+        // var temp1 = client.GetAsync("").Result;
+        try
+        {
+            var temp = ODataService.Machines.ToList().Count();
+            currentCount+= temp; ;
+        }
+        catch (Microsoft.OData.Client.DataServiceQueryException ex)
+        {
+            Console.WriteLine($"Error fetching actors: {ex.Message}");
+            if (ex.InnerException != null)
+            {
+                Console.WriteLine($"Inner exception: {ex.InnerException.Message}");
+            }
+        }
+    }
+}

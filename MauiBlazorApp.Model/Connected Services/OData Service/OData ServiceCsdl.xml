@@ -1,0 +1,49 @@
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:DataServices>
+    <Schema Namespace="WebAPI.Data" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityType Name="Machine">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="Address" Type="Edm.String" />
+        <Property Name="Port" Type="Edm.Int64" Nullable="false" />
+        <Property Name="Status" Type="WebAPI.Data.MachineStatus" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Actor">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="BirthTime" Type="Edm.DateTimeOffset" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Video">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="ActorId" Type="Edm.Guid" />
+        <NavigationProperty Name="Actor" Type="WebAPI.Data.Actor">
+          <ReferentialConstraint Property="ActorId" ReferencedProperty="Id" />
+        </NavigationProperty>
+      </EntityType>
+      <EnumType Name="MachineStatus">
+        <Member Name="Init" Value="0" />
+        <Member Name="Running" Value="1" />
+        <Member Name="Closed" Value="2" />
+      </EnumType>
+    </Schema>
+    <Schema Namespace="Default" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="Container">
+        <EntitySet Name="Machines" EntityType="WebAPI.Data.Machine" />
+        <EntitySet Name="Actors" EntityType="WebAPI.Data.Actor" />
+        <EntitySet Name="Videos" EntityType="WebAPI.Data.Video">
+          <NavigationPropertyBinding Path="Actor" Target="Actors" />
+        </EntitySet>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
