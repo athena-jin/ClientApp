@@ -1,0 +1,65 @@
+﻿@page "/"
+@inject SfDialogService Dialog
+@inject NavigationManager NavigationManager
+@inject MyODataServiceContext ODataService
+
+<SfGrid TValue="Machine" DataSource="@machines" AllowPaging="true" AllowSorting="true"
+            @bind-SelectedRowIndex="selectedRowIndex">
+           @*  <GridSelectionSettings Mode="SelectionMode.Row">
+
+            </GridSelectionSettings> *@
+    <GridColumns>
+        <GridColumn Field="Id" HeaderText="Id" IsPrimaryKey="true" Visible="false" />
+        <GridColumn Field="Name" HeaderText="Name" Width="150" />
+        <GridColumn Field="Address" HeaderText="IP Address" Width="150" />
+        <GridColumn Field="Port" HeaderText="Port" Width="100" />
+        <GridColumn Field="Status" HeaderText="Status" Width="100" />
+    </GridColumns>
+    <GridEvents TValue="Machine" OnRecordDoubleClick="NavigateToMachineDetails"></GridEvents>
+</SfGrid>
+@* @if (selectedMachine != null)
+{
+    <SfButton Content="View Details" OnClick="NavigateToMachineDetails"></SfButton>
+} *@
+
+@code{
+    #nullable disable
+    // [Inject]
+    // public MyODataServiceContext ODataService { get; set; }
+    private List<Machine> machines = new List<Machine>();
+    private int selectedRowIndex = -1;
+    private Machine? selectedMachine;
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var temp = ODataService.Machines.ToList();
+            machines.Clear();
+            machines.AddRange(temp);
+        }
+        catch (Microsoft.OData.Client.DataServiceTransportException e)
+        {
+            await Dialog.AlertAsync($"Odata Exception:{e.Message}");
+        }
+        catch (Exception ex)
+        {
+            await Dialog.AlertAsync($"Exception:{ex.Message}");
+        }
+        //machines = new List<Machine>() { temp };
+    }
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     var temp = await ODataService.Machines.ExecuteAsync();
+    //     machines.Clear();
+    //     machines.Concat(temp);
+    //     //machines = new List<Machine>() { temp };
+    // }
+
+    private void NavigateToMachineDetails(RecordDoubleClickEventArgs<Machine> args)
+    {
+        if (args.RowData.Id is Guid id)
+        {
+            NavigationManager.NavigateTo($"/machineDetails/{id}");
+        }
+    }
+}

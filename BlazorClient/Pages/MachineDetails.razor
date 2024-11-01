@@ -1,0 +1,169 @@
+﻿@page "/machineDetails/{id:guid}"
+@inject IHttpClientFactory ClientFactory
+@inject MyODataServiceContext ODataService
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+@using Microsoft.AspNetCore.Components.Forms
+@using WebAPI.Data
+
+<PageTitle>Machine Details</PageTitle>
+
+@if (machines != null && machines.Count > 0)
+{
+    <SfTab HeaderPlacement="HeaderPosition.Left" LoadOn="ContentLoad.Dynamic" SelectedItem="@selectedTabIndex" SelectedItemChanged="OnTabSelected">
+        <TabItems>
+            @foreach (var item in machines)
+            {
+                <TabItem>
+                    <HeaderTemplate>"@($"{item.Address}:{item.Port}")"</HeaderTemplate>
+                    <ContentTemplate>
+                        @if (selectedMachine != null)
+                        {
+                            <div>
+                                <!-- Editable Machine Details -->
+                                <div class="details-container">
+                                    <label>Name</label>
+                                    <input type="text" @bind="selectedMachine.Name" />
+                                    
+                                    <label>IP Address</label>
+                                    <input type="text" @bind="selectedMachine.Address" />
+
+                                    <label>Port</label>
+                                    <input type="number" @bind="selectedMachine.Port" />
+
+                                    <label>Status</label>
+                                    <dd>@selectedMachine.Status</dd>
+                                </div>
+
+                                <!-- Status Buttons -->
+                                <div class="actions-container">
+                                    <SfButton Content="Open" Disabled="@isOpenDisabled" OnClick="OpenMachine"></SfButton>
+                                    <SfButton Content="Close" Disabled="@isCloseDisabled" OnClick="CloseMachine"></SfButton>
+                                    <SfButton Content="Reset" OnClick="ResetMachine"></SfButton>
+                                </div>
+
+                                <!-- Additional Properties -->
+                               @*  <dl>
+                                    <dt>Model</dt>
+                                    <dd>@selectedMachine.Model</dd>
+                                    <dt>Manufacturer</dt>
+                                    <dd>@selectedMachine.Manufacturer</dd>
+                                    <dt>Serial Number</dt>
+                                    <dd>@selectedMachine.SerialNumber</dd>
+                                    <dt>Last Maintenance Date</dt>
+                                    <dd>@selectedMachine.LastMaintenanceDate</dd>
+                                </dl> *@
+                            </div>
+                        }
+                    </ContentTemplate>
+                </TabItem>
+            }
+            <TabItem>
+                <HeaderTemplate><SfButton OnClick="AddMachine" Disabled="AddNewMachine">+</SfButton></HeaderTemplate>
+            </TabItem>
+        </TabItems>
+    </SfTab>
+}
+else
+{
+    <p>Loading...</p>
+}
+@if (AddNewMachine)
+{
+    <EditForm Model="NewMachine" OnSubmit="Submit" FormName="New Machine">
+        <div>
+            <label>
+                Name:
+                <InputText @bind-Value="NewMachine!.Name" />
+            </label>
+            <label>
+                Address:
+                <InputText @bind-Value="NewMachine!.Address" />
+            </label>
+            <label>
+                Port:
+                <InputNumber @bind-Value="NewMachine!.Port" />
+            </label>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </EditForm>
+}
+
+
+@code {
+    private bool AddNewMachine = false;
+    private Machine? NewMachine = null;
+    private HttpClient Http => ClientFactory.CreateClient("ODataApiClient");
+    [Parameter]
+    public Guid id { get; set; }
+    private List<Machine> machines = new();
+    private Machine? selectedMachine;
+    private bool isOpenDisabled;
+    private bool isCloseDisabled;
+    private int selectedTabIndex = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        machines.Clear();
+        machines.AddRange(ODataService.Machines);
+
+        // Set initial selected machine based on the passed id
+        selectedTabIndex = machines.FindIndex(m => m.Id == id);
+        selectedMachine = machines[selectedTabIndex];
+
+        UpdateButtonStates();
+    }
+
+    private void OnTabSelected(int index)
+    {
+        selectedMachine = machines[index];
+
+        UpdateButtonStates();
+    }
+
+    private async Task OpenMachine()
+    {
+        //http://localhost:5275/odata/machines/4bb8e41e-26db-4257-af34-621989e7ebd2/open
+        ///odata/Machines/{key}/Open
+        await Http.PostAsync($"machines/{selectedMachine.Id}/open", null);
+        selectedMachine.Status = MachineStatus.Running;
+        UpdateButtonStates();
+    }
+
+    private async Task CloseMachine()
+    {
+        await Http.PostAsync($"Machines/{selectedMachine.Id}/close", null);
+        selectedMachine.Status = MachineStatus.Closed;
+        UpdateButtonStates();
+    }
+
+    private async Task ResetMachine()
+    {
+        await Http.PostAsync($"odata/Machines/{selectedMachine.Id}/reset", null);
+        selectedMachine.Status = MachineStatus.Init;
+        UpdateButtonStates();
+    }
+
+    private void UpdateButtonStates()
+    {
+        isOpenDisabled = selectedMachine?.Status == MachineStatus.Running;
+        isCloseDisabled = selectedMachine?.Status == MachineStatus.Closed || selectedMachine?.Status == MachineStatus.Init;
+    }
+    private void AddMachine()
+    {
+        AddNewMachine = true;
+        NewMachine = new Machine();
+    }
+
+    private void Submit()
+    {
+        if (NewMachine != null)
+        {
+            ODataService.AddMachines(NewMachine);
+        }
+        AddNewMachine = false;
+        NewMachine = null;
+    }
+}
