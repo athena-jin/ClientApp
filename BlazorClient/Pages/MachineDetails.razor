@@ -10,12 +10,17 @@
 
 @if (machines != null && machines.Count > 0)
 {
-    <SfTab HeaderPlacement="HeaderPosition.Left" LoadOn="ContentLoad.Dynamic" SelectedItem="@selectedTabIndex" SelectedItemChanged="OnTabSelected">
+    <SfTab @ref="Tab" HeaderPlacement="HeaderPosition.Left" LoadOn="ContentLoad.Dynamic" SelectedItemChanged="OnTabSelected">
         <TabItems>
             @foreach (var item in machines)
             {
                 <TabItem>
-                    <HeaderTemplate>"@($"{item.Address}:{item.Port}")"</HeaderTemplate>
+                    <HeaderTemplate>
+                        <div style="flex-direction:column;align-items:flex-start">
+                            <span>@($"{item.Address}:{item.Port}")</span>
+                            <SfButton OnClick ="@(_=>DeleteMachine(item))">X</SfButton>
+                        </div>
+                    </HeaderTemplate>
                     <ContentTemplate>
                         @if (selectedMachine != null)
                         {
@@ -90,9 +95,29 @@ else
         </div>
     </EditForm>
 }
+<style>
+    .custom-tab .e-tab-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .custom-tab .e-tab-header .e-tab-text {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        text-align: center;
+    }
+
+    .custom-tab .e-tab-header .close-button {
+        display: block;
+        margin-top: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
 
 
 @code {
+    private SfTab Tab { get; set; }
     private bool AddNewMachine = false;
     private Machine? NewMachine = null;
     private HttpClient Http => ClientFactory.CreateClient("ODataApiClient");
@@ -103,18 +128,36 @@ else
     private bool isOpenDisabled;
     private bool isCloseDisabled;
     private int selectedTabIndex = 0;
+    private bool hasRendered = false;
 
     protected override async Task OnInitializedAsync()
     {
+        await base.OnInitializedAsync();
         machines.Clear();
         machines.AddRange(ODataService.Machines);
 
-        // Set initial selected machine based on the passed id
+        // 找到指定 id 对应的机器的索引
         selectedTabIndex = machines.FindIndex(m => m.Id == id);
-        selectedMachine = machines[selectedTabIndex];
+        if (selectedTabIndex >= 0)
+        {
+            selectedMachine = machines[selectedTabIndex];
+        }
 
         UpdateButtonStates();
     }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // 确保 Tab 在第一次渲染后被选中
+        if (firstRender && !hasRendered && selectedTabIndex >= 0)
+        {
+            hasRendered = true;
+            await Tab.SelectAsync(selectedTabIndex);
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
 
     private void OnTabSelected(int index)
     {
@@ -155,6 +198,10 @@ else
     {
         AddNewMachine = true;
         NewMachine = new Machine();
+    }
+    private void DeleteMachine(Machine machine)
+    {
+        
     }
 
     private void Submit()

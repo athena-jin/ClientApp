@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 10/25/2024 3:41:39 PM
+// Generation date: 11/8/2024 4:22:32 PM
 namespace WebAPI.Data
 {
     /// <summary>
@@ -49,70 +49,28 @@ namespace WebAPI.Data
         /// <summary>
         /// Create a new Machine object.
         /// </summary>
-        /// <param name="ID">Initial value of Id.</param>
+        /// <param name="address">Initial value of Address.</param>
         /// <param name="port">Initial value of Port.</param>
         /// <param name="status">Initial value of Status.</param>
+        /// <param name="connectorType">Initial value of ConnectorType.</param>
+        /// <param name="ID">Initial value of Id.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public static Machine CreateMachine(global::System.Guid ID, long port, global::WebAPI.Data.MachineStatus status)
+        public static Machine CreateMachine(string address, long port, global::WebAPI.Data.MachineStatus status, global::WebAPI.Data.MachineConnectorType connectorType, global::System.Guid ID)
         {
             Machine machine = new Machine();
-            machine.Id = ID;
+            machine.Address = address;
             machine.Port = port;
             machine.Status = status;
+            machine.ConnectorType = connectorType;
+            machine.Id = ID;
             return machine;
         }
-        /// <summary>
-        /// There are no comments for Property Id in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Id")]
-        [global::System.ComponentModel.DataAnnotations.RequiredAttribute(ErrorMessage = "Id is required.")]
-        public virtual global::System.Guid Id
-        {
-            get
-            {
-                return this._Id;
-            }
-            set
-            {
-                this.OnIdChanging(value);
-                this._Id = value;
-                this.OnIdChanged();
-                this.OnPropertyChanged("Id");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Guid _Id;
-        partial void OnIdChanging(global::System.Guid value);
-        partial void OnIdChanged();
-        /// <summary>
-        /// There are no comments for Property Name in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Name")]
-        public virtual string Name
-        {
-            get
-            {
-                return this._Name;
-            }
-            set
-            {
-                this.OnNameChanging(value);
-                this._Name = value;
-                this.OnNameChanged();
-                this.OnPropertyChanged("Name");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Name;
-        partial void OnNameChanging(string value);
-        partial void OnNameChanged();
         /// <summary>
         /// There are no comments for Property Address in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("Address")]
+        [global::System.ComponentModel.DataAnnotations.RequiredAttribute(ErrorMessage = "Address is required.")]
         public virtual string Address
         {
             get
@@ -180,6 +138,77 @@ namespace WebAPI.Data
         partial void OnStatusChanging(global::WebAPI.Data.MachineStatus value);
         partial void OnStatusChanged();
         /// <summary>
+        /// There are no comments for Property ConnectorType in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ConnectorType")]
+        [global::System.ComponentModel.DataAnnotations.RequiredAttribute(ErrorMessage = "ConnectorType is required.")]
+        public virtual global::WebAPI.Data.MachineConnectorType ConnectorType
+        {
+            get
+            {
+                return this._ConnectorType;
+            }
+            set
+            {
+                this.OnConnectorTypeChanging(value);
+                this._ConnectorType = value;
+                this.OnConnectorTypeChanged();
+                this.OnPropertyChanged("ConnectorType");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::WebAPI.Data.MachineConnectorType _ConnectorType;
+        partial void OnConnectorTypeChanging(global::WebAPI.Data.MachineConnectorType value);
+        partial void OnConnectorTypeChanged();
+        /// <summary>
+        /// There are no comments for Property Name in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Name")]
+        public virtual string Name
+        {
+            get
+            {
+                return this._Name;
+            }
+            set
+            {
+                this.OnNameChanging(value);
+                this._Name = value;
+                this.OnNameChanged();
+                this.OnPropertyChanged("Name");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Name;
+        partial void OnNameChanging(string value);
+        partial void OnNameChanged();
+        /// <summary>
+        /// There are no comments for Property Id in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Id")]
+        [global::System.ComponentModel.DataAnnotations.RequiredAttribute(ErrorMessage = "Id is required.")]
+        public virtual global::System.Guid Id
+        {
+            get
+            {
+                return this._Id;
+            }
+            set
+            {
+                this.OnIdChanging(value);
+                this._Id = value;
+                this.OnIdChanged();
+                this.OnPropertyChanged("Id");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::System.Guid _Id;
+        partial void OnIdChanging(global::System.Guid value);
+        partial void OnIdChanged();
+        /// <summary>
         /// This event is raised when the value of the property is changed
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -235,63 +264,16 @@ namespace WebAPI.Data
         /// <summary>
         /// Create a new Actor object.
         /// </summary>
-        /// <param name="ID">Initial value of Id.</param>
         /// <param name="birthTime">Initial value of BirthTime.</param>
+        /// <param name="ID">Initial value of Id.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public static Actor CreateActor(global::System.Guid ID, global::System.DateTimeOffset birthTime)
+        public static Actor CreateActor(global::System.DateTimeOffset birthTime, global::System.Guid ID)
         {
             Actor actor = new Actor();
-            actor.Id = ID;
             actor.BirthTime = birthTime;
+            actor.Id = ID;
             return actor;
         }
-        /// <summary>
-        /// There are no comments for Property Id in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Id")]
-        [global::System.ComponentModel.DataAnnotations.RequiredAttribute(ErrorMessage = "Id is required.")]
-        public virtual global::System.Guid Id
-        {
-            get
-            {
-                return this._Id;
-            }
-            set
-            {
-                this.OnIdChanging(value);
-                this._Id = value;
-                this.OnIdChanged();
-                this.OnPropertyChanged("Id");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Guid _Id;
-        partial void OnIdChanging(global::System.Guid value);
-        partial void OnIdChanged();
-        /// <summary>
-        /// There are no comments for Property Name in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Name")]
-        public virtual string Name
-        {
-            get
-            {
-                return this._Name;
-            }
-            set
-            {
-                this.OnNameChanging(value);
-                this._Name = value;
-                this.OnNameChanged();
-                this.OnPropertyChanged("Name");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Name;
-        partial void OnNameChanging(string value);
-        partial void OnNameChanged();
         /// <summary>
         /// There are no comments for Property BirthTime in the schema.
         /// </summary>
@@ -316,6 +298,53 @@ namespace WebAPI.Data
         private global::System.DateTimeOffset _BirthTime;
         partial void OnBirthTimeChanging(global::System.DateTimeOffset value);
         partial void OnBirthTimeChanged();
+        /// <summary>
+        /// There are no comments for Property Name in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Name")]
+        public virtual string Name
+        {
+            get
+            {
+                return this._Name;
+            }
+            set
+            {
+                this.OnNameChanging(value);
+                this._Name = value;
+                this.OnNameChanged();
+                this.OnPropertyChanged("Name");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Name;
+        partial void OnNameChanging(string value);
+        partial void OnNameChanged();
+        /// <summary>
+        /// There are no comments for Property Id in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Id")]
+        [global::System.ComponentModel.DataAnnotations.RequiredAttribute(ErrorMessage = "Id is required.")]
+        public virtual global::System.Guid Id
+        {
+            get
+            {
+                return this._Id;
+            }
+            set
+            {
+                this.OnIdChanging(value);
+                this._Id = value;
+                this.OnIdChanged();
+                this.OnPropertyChanged("Id");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::System.Guid _Id;
+        partial void OnIdChanging(global::System.Guid value);
+        partial void OnIdChanged();
         /// <summary>
         /// This event is raised when the value of the property is changed
         /// </summary>
@@ -394,14 +423,69 @@ namespace WebAPI.Data
         /// <summary>
         /// Create a new Video object.
         /// </summary>
+        /// <param name="actorId">Initial value of ActorId.</param>
         /// <param name="ID">Initial value of Id.</param>
+        /// <param name="actor">Initial value of Actor.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public static Video CreateVideo(global::System.Guid ID)
+        public static Video CreateVideo(global::System.Guid actorId, global::System.Guid ID, global::WebAPI.Data.Actor actor)
         {
             Video video = new Video();
+            video.ActorId = actorId;
             video.Id = ID;
+            if ((actor == null))
+            {
+                throw new global::System.ArgumentNullException("actor");
+            }
+            video.Actor = actor;
             return video;
         }
+        /// <summary>
+        /// There are no comments for Property ActorId in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ActorId")]
+        [global::System.ComponentModel.DataAnnotations.RequiredAttribute(ErrorMessage = "ActorId is required.")]
+        public virtual global::System.Guid ActorId
+        {
+            get
+            {
+                return this._ActorId;
+            }
+            set
+            {
+                this.OnActorIdChanging(value);
+                this._ActorId = value;
+                this.OnActorIdChanged();
+                this.OnPropertyChanged("ActorId");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::System.Guid _ActorId;
+        partial void OnActorIdChanging(global::System.Guid value);
+        partial void OnActorIdChanged();
+        /// <summary>
+        /// There are no comments for Property Name in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Name")]
+        public virtual string Name
+        {
+            get
+            {
+                return this._Name;
+            }
+            set
+            {
+                this.OnNameChanging(value);
+                this._Name = value;
+                this.OnNameChanged();
+                this.OnPropertyChanged("Name");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Name;
+        partial void OnNameChanging(string value);
+        partial void OnNameChanged();
         /// <summary>
         /// There are no comments for Property Id in the schema.
         /// </summary>
@@ -427,56 +511,11 @@ namespace WebAPI.Data
         partial void OnIdChanging(global::System.Guid value);
         partial void OnIdChanged();
         /// <summary>
-        /// There are no comments for Property Name in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Name")]
-        public virtual string Name
-        {
-            get
-            {
-                return this._Name;
-            }
-            set
-            {
-                this.OnNameChanging(value);
-                this._Name = value;
-                this.OnNameChanged();
-                this.OnPropertyChanged("Name");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Name;
-        partial void OnNameChanging(string value);
-        partial void OnNameChanged();
-        /// <summary>
-        /// There are no comments for Property ActorId in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("ActorId")]
-        public virtual global::System.Nullable<global::System.Guid> ActorId
-        {
-            get
-            {
-                return this._ActorId;
-            }
-            set
-            {
-                this.OnActorIdChanging(value);
-                this._ActorId = value;
-                this.OnActorIdChanged();
-                this.OnPropertyChanged("ActorId");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Nullable<global::System.Guid> _ActorId;
-        partial void OnActorIdChanging(global::System.Nullable<global::System.Guid> value);
-        partial void OnActorIdChanged();
-        /// <summary>
         /// There are no comments for Property Actor in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("Actor")]
+        [global::System.ComponentModel.DataAnnotations.RequiredAttribute(ErrorMessage = "Actor is required.")]
         public virtual global::WebAPI.Data.Actor Actor
         {
             get
@@ -525,6 +564,19 @@ namespace WebAPI.Data
         Running = 1,
         [global::Microsoft.OData.Client.OriginalNameAttribute("Closed")]
         Closed = 2
+    }
+    /// <summary>
+    /// There are no comments for MachineConnectorType in the schema.
+    /// </summary>
+    [global::Microsoft.OData.Client.OriginalNameAttribute("MachineConnectorType")]
+    public enum MachineConnectorType
+    {
+        [global::Microsoft.OData.Client.OriginalNameAttribute("TCP")]
+        TCP = 0,
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Sharp7")]
+        Sharp7 = 1,
+        [global::Microsoft.OData.Client.OriginalNameAttribute("OPC_UA")]
+        OPC_UA = 2
     }
     /// <summary>
     /// Class containing all extension methods
